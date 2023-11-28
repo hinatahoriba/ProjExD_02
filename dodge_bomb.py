@@ -8,6 +8,8 @@ delta = {  # 練習３：押下キーと移動量の辞書
     pg.K_LEFT: (-5, 0),
     pg.K_RIGHT: (+5, 0)
 }
+
+
 def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
     """
     オブジェクトが画面内or画面外を判定し，真理値タプルを返す関数
@@ -21,12 +23,13 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
         tate = False
     return yoko, tate
 
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
-    kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+    kk_img = pg.transform.rotozoom(kk_img, 0 ,2.0)
     kk_rct = kk_img.get_rect()  # 練習３：こうかとんSurfaceのRectを抽出する
     kk_rct.center = 900, 400  # 練習３：こうかとんの初期座標
     #演習2：爆弾を10個作成
@@ -51,14 +54,13 @@ def main():
         if kk_rct.colliderect(bb_rct):
             print("Game Over")
             return
-
+    
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
         for k, tpl in delta.items():
             if key_lst[k]:  # キーが押されたら
                 sum_mv[0] += tpl[0]
                 sum_mv[1] += tpl[1]
-        
         screen.blit(bg_img, [0, 0])
         kk_rct.move_ip(sum_mv[0], sum_mv[1])
         if check_bound(kk_rct) != (True, True):
@@ -77,6 +79,8 @@ def main():
         pg.display.update()
         tmr += 1
         clock.tick(50)
+        
+        
 if __name__ == "__main__":
     pg.init()
     main()
