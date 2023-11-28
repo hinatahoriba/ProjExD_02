@@ -12,6 +12,19 @@ delta = {
 }
 
 
+def check_bound(rct: pg.Rect) -> tuple[bool, bool]:#型ヒント
+    """
+    オブジェクトが画面内or画面外を判定し、真理値タプルを返す関数
+    引数rct:こうかとんor爆弾SurfaceのRect
+    戻り値：横方向、縦方向判定結果（画面内：True/画面外：False）
+    """
+    yoko, tate = True, True
+    if rct.left < 0 or WIDTH < rct.right:
+        yoko = False
+    if rct.top < 0 or HEIGHT < rct.bottom:
+        tate = False
+    return (yoko, tate)
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -43,7 +56,7 @@ def main():
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
         for k, tpl in delta.items():
-            if key_lst[k]:  #keyが押されたら
+            if key_lst[k]:  #keyが
                 sum_mv[0] += tpl[0]
                 sum_mv[1] += tpl[1]
         
