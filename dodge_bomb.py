@@ -63,8 +63,17 @@ def main():
         screen.blit(bg_img, [0, 0])#写真をスクリーンに貼り付ける
         screen.blit(kk_img, kk_rct)#貼り付ける順番も大事
         kk_rct.move_ip(sum_mv[0],sum_mv[1])
+        if check_bound(kk_rct) != (True, True):
+            kk_rct.move_i(-sum_mv[0], -sum_mv[1])
         screen.blit(bb_img, bb_rct)#rctで座標を
         bb_rct.move_ip(vx,vy)
+        yoko, tate = check_bound(bb_rct)
+        if not yoko:  # 横方向にはみ出たら
+            vx *= -1
+        if not tate:  # 縦方向にはみ出たら
+            vy *= -1
+        bb_rct.move_ip(vx, vy)
+        
         pg.display.update()#スクリーンを更新する。変更を加えても更新しなければ意味が無い
         tmr += 1
         clock.tick(50)
