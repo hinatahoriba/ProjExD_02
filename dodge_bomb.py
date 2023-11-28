@@ -67,7 +67,7 @@ def main():
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
         screen.blit(kk_img, kk_rct)  # 練習３：こうかとんを移動させる
         
-        bb_img = bb_imgs[min(tmr//500, 9)]
+        bb_img = bb_imgs[min(tmr//500, 9)]  #時間の増加に伴い爆弾が大きくなる
         bb_rct.move_ip(vx, vy)  # 練習２：爆弾を移動させる
         yoko, tate = check_bound(bb_rct)
         if not yoko:  # 横方向にはみ出たら
