@@ -52,6 +52,10 @@ def main():
             if event.type == pg.QUIT:#×ボタンを押されたらリターン　閉じる
                 return
             
+        if kk_rct.colliderect(bb_rct):
+            print("Game Over")
+            return
+            
             
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
@@ -64,7 +68,7 @@ def main():
         screen.blit(kk_img, kk_rct)#貼り付ける順番も大事
         kk_rct.move_ip(sum_mv[0],sum_mv[1])
         if check_bound(kk_rct) != (True, True):
-            kk_rct.move_i(-sum_mv[0], -sum_mv[1])
+            kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
         screen.blit(bb_img, bb_rct)#rctで座標を
         bb_rct.move_ip(vx,vy)
         yoko, tate = check_bound(bb_rct)
